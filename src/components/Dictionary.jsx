@@ -43,7 +43,7 @@ const Dictionary = () => {
 
       <h3>Definition:</h3>
       <p>{answer}</p>
-      {flag && !answer && <p>Word not found in the dictionary.</p>}
+      <p>{flag && !answer ? "Word not found in the dictionary." : ""}</p>
     </>
   );
 };
