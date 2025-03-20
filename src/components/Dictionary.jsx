@@ -42,7 +42,7 @@ const Dictionary = () => {
       <button onClick={getAnswer}>Search</button>
 
       <h3>Definition:</h3>
-      <p>{answer}</p>
+      {answer && <p>{answer}</p>}
       {flag && !answer && <p>Word not found in the dictionary.</p>}
     </>
   );
