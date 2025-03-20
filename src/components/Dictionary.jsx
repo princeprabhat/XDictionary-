@@ -4,25 +4,30 @@ import { data } from "./data";
 const Dictionary = () => {
   const [textValue, setTextValue] = useState("");
   const [flag, setFlag] = useState(false);
-  const [answer, setAnswer] = useState(null);
-  //   console.log(data);
-  const handleSearch = () => {
-    setFlag(true);
-  };
+  const [answer, setAnswer] = useState("");
 
-  useEffect(() => {
-    if (!flag || !textValue) return;
+  const getAnswer = () => {
+    if (!textValue) {
+      setFlag(false);
+      return;
+    }
 
     const result = data.find(
       (el) => el.word.toLowerCase() == textValue.toLowerCase()
     );
 
-    setAnswer(result?.meaning || "Word not found in the dictionary.");
-    setFlag(false);
-  }, [flag]);
+    if (result) setAnswer(result?.meaning);
+    else {
+      setAnswer("");
+      setFlag(true);
+    }
+  };
 
   useEffect(() => {
-    if (!textValue) setAnswer(null);
+    if (!textValue) {
+      setAnswer(null);
+      setFlag(false);
+    }
   }, [textValue]);
 
   return (
@@ -34,10 +39,11 @@ const Dictionary = () => {
         onChange={(e) => setTextValue(e.target.value)}
         placeholder="Search for a word..."
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={getAnswer}>Search</button>
 
       <h3>Definition:</h3>
       <p>{answer}</p>
+      {flag && !answer && <p>Word not found in the dictionary.</p>}
     </>
   );
 };
