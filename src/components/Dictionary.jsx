@@ -7,10 +7,10 @@ const Dictionary = () => {
   const [answer, setAnswer] = useState("");
 
   const getAnswer = () => {
-    if (!textValue) {
-      setFlag(false);
-      return;
-    }
+    // if (!textValue) {
+    //   setFlag(false);
+    //   return;
+    // }
 
     const result = data.find(
       (el) => el.word.toLowerCase() == textValue.toLowerCase()
